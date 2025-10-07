@@ -4,14 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Page</title>
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- external css -->
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <!-- Login ekranını html5 ile yapmak  -->
-     <h1 class="text">Login Ekranı</h1>
-    <form action="#" method="post">
+    <h1 class="text">Login Ekranı</h1>
+    <form action="#" method="post" class="form">
       <!-- kullanıcı adı -->
       <div class="form-group">
-        <label for="">Kullanıcı Adı:</label>
+        <label for="">Kullanıcı Adı</label>
         <input
           type="text"
           class="form-input"
@@ -22,20 +33,22 @@
       </div>
 
       <div class="form-group">
-        <label for="">Kullanıcı Şifresi:</label>
-        <input 
-        type="password" 
-        class="form-input"
-        required
-        placeholder="Lütfen şifrenizi giriniz"
-        title="Şifreniz en az 8 karakter olmalı"
-         />
+        <label for="">Kullanıcı Şifresi</label>
+        <input
+          type="password"
+          class="form-input"
+          required
+          placeholder="Lütfen şifrenizi giriniz"
+          title="Şifreniz en az 8 karakter olmalı"
+        />
       </div>
 
       <div class="form-group">
-        <button type="reset" class="btn">Reset</button>
-        <button type="submit" class="btn">Submit</button>
+        <button class="button" id="reset-id" type="reset" class="btn">Reset</button>
+        <button class="button" id="submit-id" type="submit" class="btn">Submit</button>
       </div>
     </form>
+
+    <a href="#">Readme</a>
   </body>
 </html>

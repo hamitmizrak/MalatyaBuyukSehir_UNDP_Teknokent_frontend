@@ -1,0 +1,83 @@
+html{
+    font-size: 40px;
+}
+
+body{
+    background-color: blue;
+    background-color: #4545c2;
+    background-color: rgb(15, 73, 199);
+    background-color: rgba(48, 111, 248, 0.8);
+    color: white;
+
+    font-family: "Jost", Arial, Helvetica, sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    line-height: 1.5;
+    text-align: center;
+    /* height: 100vh; */
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 0.5rem;
+}
+
+label{
+    display: block;
+    font-size: 0.7rem;
+}
+
+.form{
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 13rem;
+    margin: 1rem auto;
+    padding:.6rem;
+    border-radius: 0%.5rem;
+}
+
+.form-group{
+    margin-top: 0.8rem;
+}
+
+.button{
+    margin-top: 0.4rem;
+    padding: 0.2rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: .8rem;
+     transition: all 1s ease;
+}
+
+
+#reset-id{
+    background-color: red;
+    color: rgb(27, 27, 27);
+}
+
+#reset-id:hover{
+    background-color: rgb(27, 27, 27);
+    color: red;
+}
+
+
+#submit-id{
+    background-color: rgb(23, 20, 218);
+    color: rgb(255, 255, 255);
+}
+
+
+#submit-id:hover{
+    background-color: rgb(255, 255, 255);
+    color:  rgb(23, 20, 218);
+}
+
+
+input[type="text"], input[type="password"]{
+    width: 60%;
+    padding: 0.3rem;
+    border-radius: 5px;
+    border: none;
+}
