@@ -376,58 +376,22 @@
         confirmPassword.addEventListener('input', validatePasswordMatch);
 
         // Form submit işlemi
-        form.addEventListener(
-          'submit',
-          function (event) {
-            // Şifre eşitliğini kontrol et
-            validatePasswordMatch();
+        form.addEventListener('submit', function (event) {
+          // Şifre eşitliğini kontrol et
+          validatePasswordMatch();
 
-            if (!form.checkValidity()) {
-              event.preventDefault(); // Formun varsayılan gönderimini engelle
-              event.stopPropagation(); // Olayın daha fazla yayılmasını engelle
-            } else {
-              event.preventDefault(); // Formun varsayılan gönderimini engelle
+          if (!form.checkValidity()) {
+            event.preventDefault(); // Formun varsayılan gönderimini engelle
+            event.stopPropagation(); // Olayın daha fazla yayılmasını engelle
+          } else {
+            event.preventDefault(); // Formun varsayılan gönderimini engelle
 
-              successAlert.classList.remove('d-none');
-              setTimeout(() => {
-                successAlert.classList.add('d-none');
-              }, 3000);
-            }
-
-
-
-            // Tüm inputların geçerliliğini kontrol et
-            let allValid = true;
-            inputs.forEach(function (input) {
-              if (!input.checkValidity()) {
-                allValid = false;
-                input.classList.add('is-invalid');
-              } else {
-                input.classList.remove('is-invalid');
-                //input.classList.add('is-valid');
-              }
-            });
-
-            // Eğer tüm inputlar geçerliyse, formu gönder
-            if (allValid) {
-              // Simulate form submission success
-              successAlert.classList.remove('d-none');
-              setTimeout(() => {
-                successAlert.classList.add('d-none');
-              }, 3000);
-
-              form.reset(); // Formu sıfırla
-              inputs.forEach(function (input) {
-                input.classList.remove('is-invalid');
-                //input.classList.remove('is-valid');
-              });
-            } else {
-              // Geçersiz alanlar varsa, kullanıcıyı bilgilendir
-              alert('Lütfen tüm alanları doğru şekilde doldurun.');
-            }
-          },
-          false
-        );
+            successAlert.classList.remove('d-none');
+            setTimeout(() => {
+              successAlert.classList.add('d-none');
+            }, 3000);
+          }
+        }); //end form submit
       }); //end DOMContentLoaded
     </script>
   </body>
