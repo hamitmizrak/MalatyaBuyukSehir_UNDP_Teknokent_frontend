@@ -70,7 +70,7 @@
         >
           <!-- FIRSTNAME -->
           <div class="form-group mb-4">
-            <label for="firstName" class="form-label">Adınız</label>
+            <label for="firstName" class="form-label text-primary">Adınız</label>
             <input
               type="text"
               id="firstName"
@@ -100,7 +100,7 @@
 
           <!-- LASTNAME -->
           <div class="form-group mb-4">
-            <label for="lastName" class="form-label">Soyadınız</label>
+            <label for="lastName" class="form-label text-primary">Soyadınız</label>
             <input
               type="text"
               id="lastName"
@@ -128,9 +128,42 @@
             </div>
           </div>
 
+          <!-- USERNAME -->
+          <div class="form-group mb-4">
+            <label for="username" class="form-label text-primary">Kullanıcı adı</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              placeholder="Soyadınız ..."
+              autocomplete="HamitMızrak"
+              required
+              autofocus
+              pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{3,16}$"
+            />
+            <!-- Validation Alert -->
+            <div class="form-text text-danger">
+              3–16 karakter; harf, rakam, nokta, alt çizgi, tire kullanılabilir.
+            </div>
+            <div
+              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback44"
+              role="alert"
+            >
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+
+              <strong>Validation:</strong>
+              Kullanıcı adı formatı hatalı (3–16 uzunluk, izinli karakterler: a-z, 0-9, . _ -).
+            </div>
+          </div>
+
           <!-- EMAIL -->
           <div class="form-group mb-4">
-            <label for="emailName" class="form-label">Email</label>
+            <label for="emailName" class="form-label text-primary">Email</label>
             <input
               type="email"
               id="emailName"
@@ -157,6 +190,8 @@
               Mail formatında yazmalısınız.
             </div>
           </div>
+
+          <!-- pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,64}$" -->
         </form>
       </div>
     </div>
