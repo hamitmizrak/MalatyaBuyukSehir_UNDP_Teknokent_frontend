@@ -246,48 +246,63 @@
           </form>
         </div>
       </div>
+    </div>
 
-      <!-- Modal Body -->
-      <div
-        class="modal fade"
-        id="termsModal"
-        tabindex="-1"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        role="dialog"
-        aria-labelledby="modalTitleId"
-        aria-hidden="true"
-      >
-        <div
-          class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md"
-          role="document"
-        >
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalTitleId">KVKK ve Kullanım Şartları</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <p>
-                Bu metin, kişisel verilerin korunması ve kullanım şartları hakkında bilgilendirme
-                amacıyla konulmuştur.
-              </p>
-              <p>1) İşlenen veriler, amaç, hukuki sebep, saklama süresi...</p>
-              <p>2) Üçüncü taraflarla paylaşım, aktarım, güvenlik önlemleri...</p>
-              <p>3) İlgili kişi hakları (KVKK md. 11); başvuru yöntemleri...</p>
-              <p>4) Çerezler, cihaz tanımlayıcıları, oturum ve analitik veriler...</p>
-              <p>5) İletişim ve itiraz mekanizmaları...</p>
-              <p>6) Sürüm, yürürlük tarihi ve değişiklik yetkisi...</p>
-              <hr />
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
-            </div>
+    <!-- KVKK & Kullanım Şartları Modal (YENİ) -->
+    <div
+      class="modal fade"
+      id="termsModal"
+      tabindex="-1"
+      aria-labelledby="termsModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="termsModalLabel">KVKK & Kullanım Şartları</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Kapat"
+            ></button>
+          </div>
+          <div class="modal-body" id="termsBody">
+            <!-- Örnek uzun metin: gerçek şartlarınızı buraya koyabilirsiniz -->
+            <p>
+              Bu metin, kişisel verilerin korunması ve kullanım şartları hakkında bilgilendirme
+              amacıyla konulmuştur.
+            </p>
+            <p>1) İşlenen veriler, amaç, hukuki sebep, saklama süresi...</p>
+            <p>2) Üçüncü taraflarla paylaşım, aktarım, güvenlik önlemleri...</p>
+            <p>3) İlgili kişi hakları (KVKK md. 11); başvuru yöntemleri...</p>
+            <p>4) Çerezler, cihaz tanımlayıcıları, oturum ve analitik veriler...</p>
+            <p>5) İletişim ve itiraz mekanizmaları...</p>
+            <p>6) Sürüm, yürürlük tarihi ve değişiklik yetkisi...</p>
+            <p>7) Sürüm, yürürlük tarihi ve değişiklik yetkisi...</p>
+            <p>8) Sürüm, yürürlük tarihi ve değişiklik yetkisi...</p>
+            <p>9) Sürüm, yürürlük tarihi ve değişiklik yetkisi...</p>
+            <p>10) Sürüm, yürürlük tarihi ve değişiklik yetkisi...</p>
+            <hr />
+            <p class="mb-0">
+              <strong>Not:</strong>
+              <em>“Kabul Ediyorum”</em>
+              butonunun aktif olması için metni en alta kadar kaydırmanız gerekir.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <span class="me-auto small" id="scrollStatus">Okumaya devam edin…</span>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+              id="btnLater"
+            >
+              Daha Sonra
+            </button>
+            <button type="button" class="btn btn-primary" id="btnAcceptTerms" disabled>
+              Kabul Ediyorum
+            </button>
           </div>
         </div>
       </div>
@@ -368,6 +383,56 @@
         const confirm = document.getElementById('confirmPassword');
         pass.addEventListener('input', validatePasswordMatch);
         confirm.addEventListener('input', validatePasswordMatch);
+
+        // === KVKK MODAL AKIŞI (YENİ) ===
+        const termsCheckbox = document.getElementById('terms');
+        const termsModalEl = document.getElementById('termsModal');
+        const termsBody = document.getElementById('termsBody');
+        const btnAccept = document.getElementById('btnAcceptTerms');
+        const scrollStatus = document.getElementById('scrollStatus');
+
+        // Bootstrap Modal instance (static: dışa tıklayınca kapanmasın, kabul zorunlu)
+        const termsModal = new bootstrap.Modal(termsModalEl, {
+          backdrop: 'static',
+          keyboard: false,
+        });
+
+        // Onay kutusu tıklandığında modalı göster 999
+        // Checkbox'a tıklanınca modal açılır; henüz kabul edilmediyse tıklamayı engelleriz
+        termsCheckbox.addEventListener('click', function (e) {
+          if (!userHasAccepted) {
+            e.preventDefault();
+            e.stopPropagation();
+            // durum reset
+            btnAccept.disabled = true;
+            scrollStatus.textContent = 'Okumaya devam edin…';
+            termsBody.scrollTop = 0;
+            termsModal.show();
+          }
+        });
+
+        // En alta kadar kaydırıldığında "Kabul Ediyorum" aktif olsun
+        termsBody.addEventListener('scroll', function () {
+          const atBottom =
+            termsBody.scrollTop + termsBody.clientHeight >= termsBody.scrollHeight - 1;
+          if (atBottom) {
+            btnAccept.disabled = false;
+            scrollStatus.textContent = 'Kabul edebilirsiniz.';
+          }
+        });
+
+        // Kabul edildiğinde checkbox işaretlenir ve modal kapanır
+        btnAccept.addEventListener('click', function () {
+          userHasAccepted = true;
+          termsCheckbox.checked = true;
+          termsCheckbox.setCustomValidity('');
+          termsModal.hide();
+        });
+
+        // Modalı "Daha Sonra" ile kapatırsa, checkbox işaretlenmeden kalır
+        document.getElementById('btnLater').addEventListener('click', function () {
+          // isteğe bağlı: burada ekstra bir uyarı gösterilebilir
+        });
 
         // Form gönderiminde Bootstrap doğrulama akışı
         form.addEventListener(
