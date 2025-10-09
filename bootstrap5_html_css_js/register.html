@@ -57,10 +57,14 @@
     <noscript>your browser is not showing</noscript>
     <!-- start code -->
     <!-- bs5-alert-clos... -->
-      <!-- Başarılı kayıt sonrası gösterilecek demo mesaj alanı (başta gizli) -->
-  <div id="successAlert" class="alert alert-success position-fixed top-0 start-50 translate-middle-x mt-3 d-none" role="alert">
-    Kayıt başarılı (demo)! Gönderim backend'e yapılmadı.
-  </div>
+    <!-- Başarılı kayıt sonrası gösterilecek demo mesaj alanı (başta gizli) -->
+    <div
+      id="successAlert"
+      class="alert alert-success position-fixed top-0 start-50 translate-middle-x mt-3 d-none"
+      role="alert"
+    >
+      Kayıt başarılı (demo)! Gönderim backend'e yapılmadı.
+    </div>
 
     <!-- Form -->
     <!-- bs5-card-def... -->
@@ -364,7 +368,6 @@
         const successAlert = document.getElementById('successAlert');
         //Tüm inputları için canlı listener ekle
         inputs.forEach(attachValidity);
-      
 
         // password ve confirmPassword eşitliği kontrolü
         const password = document.getElementById('password');
@@ -373,8 +376,55 @@
         confirmPassword.addEventListener('input', validatePasswordMatch);
 
         // Form submit işlemi
+        form.addEventListener(
+          'submit',
+          function (event) {
+            // Şifre eşitliğini kontrol et
+            validatePasswordMatch();
 
-       
+            if (!form.checkValidity()) {
+              event.preventDefault(); // Formun varsayılan gönderimini engelle
+              event.stopPropagation(); // Olayın daha fazla yayılmasını engelle
+            } else {
+              event.preventDefault(); // Formun varsayılan gönderimini engelle
+
+              successAlert.classList.remove('d-none');
+            }
+
+
+            
+            // Tüm inputların geçerliliğini kontrol et
+            let allValid = true;
+            inputs.forEach(function (input) {
+              if (!input.checkValidity()) {
+                allValid = false;
+                input.classList.add('is-invalid');
+              } else {
+                input.classList.remove('is-invalid');
+                //input.classList.add('is-valid');
+              }
+            });
+
+            // Eğer tüm inputlar geçerliyse, formu gönder
+            if (allValid) {
+              // Simulate form submission success
+              successAlert.classList.remove('d-none');
+              setTimeout(() => {
+                successAlert.classList.add('d-none');
+              }, 3000);
+
+              form.reset(); // Formu sıfırla
+              inputs.forEach(function (input) {
+                input.classList.remove('is-invalid');
+                //input.classList.remove('is-valid');
+              });
+            } else {
+              // Geçersiz alanlar varsa, kullanıcıyı bilgilendir
+              alert('Lütfen tüm alanları doğru şekilde doldurun.');
+            }
+          },
+          false
+        );
       }); //end DOMContentLoaded
     </script>
   </body>
