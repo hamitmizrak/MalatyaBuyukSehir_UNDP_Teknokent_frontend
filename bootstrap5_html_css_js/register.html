@@ -44,7 +44,9 @@
     <div class="card shadow-sm auth-card">
       <div class="card-body p-4">
         <h1 class="h4 mb-3 text-center text-primary h1">Kayıt Ol</h1>
-        <p class="text-secondary text-muted text-center mb-4">(*) Lütfen bilgilerinizi eksiksiz doldurunuz.</p>
+        <p class="text-secondary text-muted text-center mb-4">
+          (*) Lütfen bilgilerinizi eksiksiz doldurunuz.
+        </p>
 
         <!-- Form etiketi -->
         <!-- novalidate: Tarayıcı'nın default baloncuk uyarılarını kapatır, Bootstrap ile özel doğrulama uygularız. -->
@@ -52,7 +54,7 @@
           <!-- Ad alanı -->
           <!-- required: boş bırakılamaz ; pattern: Türkçe harf ve en az 2 karakter -->
           <div class="mb-3">
-            <label for="firstName" class="form-label">Ad (*) </label>
+            <label for="firstName" class="form-label">Ad (*)</label>
             <input
               type="text"
               class="form-control"
@@ -172,8 +174,8 @@
           <!-- Gönder butonu -->
           <!-- type="submit": formu gönderir; JS tarafında valid değilse engellenir -->
           <div class="d-grid44">
-            <button type="reset" class="btn btn-danger">Temizle</button>
-            <button id="submitBtn" type="submit" class="btn btn-primary">Kayıt Ol</button>
+            <button onclick="resetData()" class="btn btn-danger">Temizle</button>
+            <button type="submit" id="submitBtn" class="btn btn-primary">Kayıt Ol</button>
             <a href="http://www.google.com" target="_blank" class="btn btn-success">Home Page</a>
           </div>
         </form>
@@ -210,6 +212,15 @@
           confirm.setCustomValidity('');
         }
       }
+
+      // RESET BUTTON==> Formu sıfırlamak isterseniz:
+      const resetData = () => {
+        alert('Form temizlendi.');
+        const form = document.getElementById('registerForm');
+        form.reset();
+        form.classList.remove('was-validated');
+        confirm.setCustomValidity('');
+      };
 
       // Sayfa yüklendiğinde çalışacak kurulumlar
       document.addEventListener('DOMContentLoaded', function () {
@@ -249,11 +260,6 @@
               // Örn:
               // const payload = Object.fromEntries(new FormData(form).entries());
               // fetch('/auth/register', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) })
-
-              // (Opsiyonel) Formu sıfırlamak isterseniz:
-              // form.reset();
-              // form.classList.remove('was-validated');
-              // confirm.setCustomValidity('');
             }
 
             // Bootstrap görünür doğrulamayı etkinleştir
