@@ -16,21 +16,39 @@
     />
     <!-- internal css -->
     <style>
+      :root {
+        --card-max: 28rem;
+      }
       html {
-        font-size: 20px;
+        font-size: 18px;
       }
       body {
+        min-height: 100vh;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial,
+          'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+        background: radial-gradient(1200px 800px at 20% 10%, #f1f5f9, transparent),
+          radial-gradient(1200px 800px at 80% 90%, #e8f0fe, transparent);
+        display: grid;
+        place-items: center;
         margin: 0;
-        padding: 0px;
-        box-sizing: border-box;
-        font-family: 'Jost', sans-serif;
       }
       .auto-card {
-        max-width: 26rem;
+        max-width: var(--card-max);
         width: 100%;
       }
+      .brand {
+        letter-spacing: 0.5px;
+      }
+      .help {
+        font-size: 0.9rem;
+      }
+      .is-hidden {
+        display: none !important;
+      }
+      .form-check .invalid-feedback {
+        display: block;
+      } /* keep bootstrap semantics */
     </style>
-
     <!-- external css -->
     <!-- <link rel="stylesheet" href="style.css" /> -->
   </head>
@@ -65,7 +83,7 @@
           id="registerForm"
           class="needs-validation"
           method="get"
-          novalidate44
+          novalidate
           autocomplete="on"
         >
           <!-- FIRSTNAME -->
@@ -315,5 +333,35 @@
 
     <!-- external js -->
     <!-- <script src="script.js"></script> -->
+    <!-- internal js -->
+    <script>
+      function attachValidity() {
+        input.addEventListener('input', function () {
+          if (this.checkValidity()) {
+            this.classList.remove('is-invalid');
+            //this.classList.add('is-valid');
+            alert('success');
+          } else {
+            //this.classList.remove('is-valid');
+            //this.classList.add('is-invalid');
+            alert('failed');
+          }
+        });
+      }
+
+      // password ve confirmPassword eşitliği kontrolü
+      const validatePasswordMatch = function () {
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+
+        if (password.value !== confirmPassword.value) {
+          confirmPassword.setCustomValidity('Şifreler uyuşmuyor');
+        } else {
+          confirmPassword.setCustomValidity('');
+        }
+      };
+
+      // Sayfa inputlar için doğrulayıcı bileşenler
+    </script>
   </body>
 </html>
