@@ -57,14 +57,10 @@
     <noscript>your browser is not showing</noscript>
     <!-- start code -->
     <!-- bs5-alert-clos... -->
-    <div
-      class="alert alert-danger position-fixed top-0 start-50 translate-middle-x mt-5 d-none alert-dismissible fade show"
-      role="alert"
-    >
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      <strong>Kayıt Başarılı...</strong>
-      2025
-    </div>
+      <!-- Başarılı kayıt sonrası gösterilecek demo mesaj alanı (başta gizli) -->
+  <div id="successAlert" class="alert alert-success position-fixed top-0 start-50 translate-middle-x mt-3 d-none" role="alert">
+    Kayıt başarılı (demo)! Gönderim backend'e yapılmadı.
+  </div>
 
     <!-- Form -->
     <!-- bs5-card-def... -->
@@ -359,7 +355,7 @@
         } else {
           confirmPassword.setCustomValidity('');
         }
-      };
+      }; //end validatePasswordMatch
 
       // Sayfa inputlar için doğrulayıcı bileşenler
       document.addEventListener('DOMContentLoaded', function () {
@@ -370,51 +366,16 @@
         inputs.forEach(attachValidity);
       
 
-
-
-
-
-
-        
-        inputs.forEach((input) => {
-          // her input için geçerlilik denetleyicisi ekle
-          input.addEventListener('input', function () {
-            if (this.checkValidity()) {
-              this.classList.remove('is-invalid');
-              this.classList.add('is-valid');
-            } else {
-              this.classList.remove('is-valid');
-              this.classList.add('is-invalid');
-            }
-          });
-        });
-
         // password ve confirmPassword eşitliği kontrolü
         const password = document.getElementById('password');
         const confirmPassword = document.getElementById('confirmPassword');
-
         password.addEventListener('input', validatePasswordMatch);
         confirmPassword.addEventListener('input', validatePasswordMatch);
 
-        // form submit işlemi
-        form.addEventListener(
-          'submit',
-          function (event) {
-            // formun geçerliliğini kontrol et
-            if (!form.checkValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
-            } else {
-              // form geçerliyse, başarı mesajı göster
-              const alertBox = document.querySelector('.alert');
-              alertBox.classList.remove('d-none');
-            }
+        // Form submit işlemi
 
-            form.classList.add('was-validated');
-          },
-          false
-        );
-      });
+       
+      }); //end DOMContentLoaded
     </script>
   </body>
 </html>
