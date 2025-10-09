@@ -202,6 +202,9 @@
               autocomplete="sifre"
               required
               autofocus
+              minlength="8"
+              maxlength="64"
+              title="Şifreniz en az 8 karakter olmalı, en az bir büyük harf, bir küçük harf ve bir rakam içermelidir."
               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,64}$"
             />
             <!-- Validation Alert -->
@@ -221,17 +224,20 @@
             </div>
           </div>
 
-            <!-- RE-PASSWORD -->
+          <!-- RE-PASSWORD -->
           <div class="form-group mb-4">
-            <label for="re-password" class="form-label text-primary">Şifreniz</label>
+            <label for="confirmPassword" class="form-label text-primary">Şifreniz</label>
             <input
               type="password"
-              id="re-password"
+              id="confirmPassword"
               class="form-control"
               placeholder="şifrenizi tekrar giriniz..."
               autocomplete="sifre"
               required
               autofocus
+              minlength="8"
+              maxlength="64"
+              title="Şifreniz en az 8 karakter olmalı, en az bir büyük harf, bir küçük harf ve bir rakam içermelidir."
               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,64}$"
             />
             <!-- Validation Alert -->
