@@ -389,10 +389,13 @@
               event.preventDefault(); // Formun varsayılan gönderimini engelle
 
               successAlert.classList.remove('d-none');
+              setTimeout(() => {
+                successAlert.classList.add('d-none');
+              }, 3000);
             }
 
 
-            
+
             // Tüm inputların geçerliliğini kontrol et
             let allValid = true;
             inputs.forEach(function (input) {
