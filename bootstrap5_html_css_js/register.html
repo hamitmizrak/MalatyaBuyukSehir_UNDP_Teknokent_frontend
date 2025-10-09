@@ -25,7 +25,7 @@
         box-sizing: border-box;
         font-family: 'Jost', sans-serif;
       }
-      .auto-card{
+      .auto-card {
         max-width: 26rem;
         width: 100%;
       }
@@ -35,10 +35,30 @@
     <!-- <link rel="stylesheet" href="style.css" /> -->
   </head>
 
-  <body>
+  <body class="d-flex align-items-center justify-content-center">
     <noscript>your browser is not showing</noscript>
     <!-- start code -->
-
+   <!-- bs5-alert-clos... -->
+    <div
+      class="alert alert-danger position-fixed top-0 start-50 translate-middle-x mt-5 d-none44 alert-dismissible fade show"
+      role="alert"
+    >
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+      <strong>Kayıt Başarılı...</strong> 2025
+    </div>
+    
+    <script>
+      var alertList = document.querySelectorAll(".alert");
+      alertList.forEach(function (alert) {
+        new bootstrap.Alert(alert);
+      });
+    </script>
+    
     <!-- end code -->
 
     <!-- Bootstrap JavaScript Libraries -->
