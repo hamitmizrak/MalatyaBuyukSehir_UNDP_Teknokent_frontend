@@ -192,17 +192,6 @@
       </div>
     </div>
 
-    <!-- Modal  -->
-    <!-- Modal trigger button -->
-    <button
-      type="button"
-      class="btn btn-primary btn-lg"
-      data-bs-toggle="modal"
-      data-bs-target="#termsModal"
-    >
-      Launch
-    </button>
-
     <!-- Modal Body -->
     <div
       class="modal fade"
@@ -264,6 +253,11 @@
     <!-- Form doğrulama ve demo gönderim JS'i -->
     <!-- Aşağıdaki JS, Bootstrap tarzı doğrulamayı etkinleştirir ve şifre eşleşmesini kontrol eder. -->
     <script>
+      // FIELD
+
+      // KVKK onay durumu (isteğe bağlı, formun submit olayında kontrol edilebilir)
+      let userHasAcceptedTerms = false;
+
       // Şifre göster/gizle işlevi
       document.getElementById('togglePwd').addEventListener('change', function () {
         const pwd = document.getElementById('password');
@@ -301,6 +295,13 @@
         form.reset();
         form.classList.remove('was-validated');
         confirm.setCustomValidity('');
+
+        // KVKK onay kutusunu manuel sıfırla
+        const terms = document.getElementById('terms');
+        if(terms){
+          terms.checked = false;
+          userHasAcceptedTerms = false;
+        }
       };
 
       // Sayfa yüklendiğinde çalışacak kurulumlar
