@@ -22,7 +22,7 @@
     <style>
       body {
         min-height: 100vh;
-        background: #454647;
+        background: linear-gradient(135deg, #256aaf 0%, #6bd6a4 100%);
       }
       .auth-card {
         max-width: 520px;
@@ -254,9 +254,8 @@
     <!-- Aşağıdaki JS, Bootstrap tarzı doğrulamayı etkinleştirir ve şifre eşleşmesini kontrol eder. -->
     <script>
       // FIELD
-
-      // KVKK onay durumu (isteğe bağlı, formun submit olayında kontrol edilebilir)
-      let userHasAcceptedTerms = false;
+      // GLOBAL: KVKK okundu bilgisini saklamak için (modal kabul edilince true olur)
+      let userHasAccepted = false;
 
       // Şifre göster/gizle işlevi
       document.getElementById('togglePwd').addEventListener('change', function () {
@@ -298,7 +297,7 @@
 
         // KVKK onay kutusunu manuel sıfırla
         const terms = document.getElementById('terms');
-        if(terms){
+        if (terms) {
           terms.checked = false;
           userHasAcceptedTerms = false;
         }
