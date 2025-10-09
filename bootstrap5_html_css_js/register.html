@@ -193,7 +193,7 @@
 
           <!-- PASSWORD -->
           <div class="form-group mb-4">
-            <label for="password" class="form-label text-primary">Şifreniz</label>
+            <label for="password" class="form-label text-primary">Şifreniz (*)</label>
             <input
               type="password"
               id="password"
@@ -229,7 +229,7 @@
 
           <!-- RE-PASSWORD -->
           <div class="form-group mb-4">
-            <label for="confirmPassword" class="form-label text-primary">Şifreniz</label>
+            <label for="confirmPassword" class="form-label text-primary">Şifre Tekrarı (*)</label>
             <input
               type="password"
               id="confirmPassword"
@@ -261,6 +261,31 @@
 
               <strong>Validation:</strong>
               Şifreler uyuşmuyor formatında yazmalısınız.
+            </div>
+          </div>
+
+          <!-- KVKK / kullanım şartları onayı -->
+          <!-- required: işaretlenmeden form gönderilemez -->
+
+          <div class="mb-3 form-check">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="terms" />
+              <label class="form-check-label" for="terms">Okudum, Onaylıyorum</label>
+            </div>
+
+            <div
+              class="mt-2 mb-1 alert alert-success alert-dismissible fade show invalid-feedback44"
+              role="alert"
+            >
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+
+              <strong>Validation:</strong>
+              Devam edebilmeniz için onay vermeniz gerekiyor.
             </div>
           </div>
         </form>
