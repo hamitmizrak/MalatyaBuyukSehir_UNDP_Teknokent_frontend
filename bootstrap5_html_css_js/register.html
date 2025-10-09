@@ -68,21 +68,22 @@
           novalidate
           autocomplete="on"
         >
-          <!-- USERNAME -->
+          <!-- FIRSTNAME -->
           <div class="form-group mb-4">
-            <label for="firstName" class="form-label">Username</label>
+            <label for="firstName" class="form-label">Adınız</label>
             <input
               type="text"
               id="firstName"
               class="form-control"
-              placeholder="Username..."
+              placeholder="Adınız ..."
+              autocomplete="Hamit"
               required
               autofocus
-              pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{2,}$"
+              pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{3,}$"
             />
             <!-- Validation Alert -->
             <div
-              class="mt-1 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback44"
+              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback44"
               role="alert"
             >
               <button
@@ -93,7 +94,67 @@
               ></button>
 
               <strong>Validation:</strong>
-              En az 2 karakter yazmalısınız
+              Adınız için en az 3 karakter yazmalısınız
+            </div>
+          </div>
+
+          <!-- LASTNAME -->
+          <div class="form-group mb-4">
+            <label for="lastName" class="form-label">Soyadınız</label>
+            <input
+              type="text"
+              id="lastName"
+              class="form-control"
+              placeholder="Soyadınız ..."
+              autocomplete="Mızrak"
+              required
+              autofocus
+              pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{3,45}$"
+            />
+            <!-- Validation Alert -->
+            <div
+              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback44"
+              role="alert"
+            >
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+
+              <strong>Validation:</strong>
+              Soyadı için en az 3 enfazla 45 karakter yazmalısınız
+            </div>
+          </div>
+
+          <!-- EMAIL -->
+          <div class="form-group mb-4">
+            <label for="emailName" class="form-label">Email</label>
+            <input
+              type="email"
+              id="emailName"
+              class="form-control"
+              placeholder="hamitmizrak@gmail.com ..."
+              autocomplete="mail@"
+              required
+              autofocus
+              pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{3,}$"
+            />
+            <!-- Validation Alert -->
+            <div
+              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback44"
+              role="alert"
+            >
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+
+              <strong>Validation:</strong>
+              Mail formatında yazmalısınız.
             </div>
           </div>
         </form>
