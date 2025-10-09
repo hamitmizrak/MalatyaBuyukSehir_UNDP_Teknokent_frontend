@@ -1,398 +1,267 @@
-<!-- bs5-$ -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
   <head>
-    <title>Bootstrap5, html5,css3,js</title>
-    <!-- Required meta tags -->
+    <!-- Sayfa kodlaması ve mobil uyum -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Bootstrap CSS v5.2.1 -->
+    <!-- Başlık -->
+    <title>Basit Kayıt Formu (Bootstrap + HTML/CSS/JS)</title>
+
+    <!-- Bootstrap 5 CSS (CDN) -->
+    <!-- Bu satır Bootstrap'ın stillerini projeye dahil eder. -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <!-- internal css -->
+
+    <!-- Basit sayfa içi CSS -->
+    <!-- Formu ekranda ortalar, kart genişliğini masaüstünde dar tutar. -->
     <style>
-      :root {
-        --card-max: 28rem;
-      }
-      html {
-        font-size: 18px;
-      }
       body {
         min-height: 100vh;
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial,
-          'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
-        background: radial-gradient(1200px 800px at 20% 10%, #f1f5f9, transparent),
-          radial-gradient(1200px 800px at 80% 90%, #e8f0fe, transparent);
-        display: grid;
-        place-items: center;
-        margin: 0;
+        background: #f6f8fa;
       }
-      .auto-card {
-        max-width: var(--card-max);
+      .auth-card {
+        max-width: 520px;
         width: 100%;
       }
-      .brand {
-        letter-spacing: 0.5px;
-      }
-      .help {
-        font-size: 0.9rem;
-      }
-      .is-hidden {
-        display: none !important;
-      }
-      .form-check .invalid-feedback {
-        display: block;
-      } /* keep bootstrap semantics */
     </style>
-    <!-- external css -->
-    <!-- <link rel="stylesheet" href="style.css" /> -->
   </head>
-
   <body class="d-flex align-items-center justify-content-center">
-    <noscript>your browser is not showing</noscript>
-    <!-- start code -->
-    <!-- bs5-alert-clos... -->
     <!-- Başarılı kayıt sonrası gösterilecek demo mesaj alanı (başta gizli) -->
     <div
       id="successAlert"
       class="alert alert-success position-fixed top-0 start-50 translate-middle-x mt-3 d-none"
       role="alert"
     >
-      Kayıt başarılı (demo)! Gönderim backend'e yapılmadı.
+      Kayıt başarılı .
     </div>
 
-    <!-- Form -->
-    <!-- bs5-card-def... -->
-    <div class="card auto-card shadow-lg mt-5">
-      <!-- <img class="card-img-top" src="holder.js/100x180/" alt="Title" /> -->
-      <div class="card-body">
-        <!-- h1.h4.text-primary.text-center{Kayıt Ol} -->
-        <h1 class="text-uppercase h2 mb-4 text-primary text-center">Kayıt Ol</h1>
-        <!-- p.text-muted.text-center.mb-4{Lütfen bilgilerinizi eksiksiz giriniz} -->
-        <p class="text-muted text-center mb-4">(*) Lütfen bilgilerinizi eksiksiz giriniz</p>
+    <!-- Kart: Formu içinde barındırır -->
+    <div class="card shadow-sm auth-card">
+      <div class="card-body p-4">
+        <h1 class="h4 mb-3 text-center text-primary h1">Kayıt Ol</h1>
+        <p class="text-secondary text-muted text-center mb-4">(*) Lütfen bilgilerinizi eksiksiz doldurunuz.</p>
 
-        <!-- form#registerForm.needs-validation>div.form-group>label#fname+input#fname.form-control -->
-        <!-- novalidate: Bu yapı formun kendi doğrulama özelliklerini devre dışı bırakır ve özel doğrulama işlemleri için kullanılır. -->
-        <form
-          action="#"
-          id="registerForm"
-          class="needs-validation"
-          method="get"
-          novalidate
-          autocomplete="on"
-        >
-          <!-- FIRSTNAME -->
-          <div class="form-group mb-4">
-            <label for="firstName" class="form-label text-primary">Adınız (*)</label>
+        <!-- Form etiketi -->
+        <!-- novalidate: Tarayıcı'nın default baloncuk uyarılarını kapatır, Bootstrap ile özel doğrulama uygularız. -->
+        <form id="registerForm" class="needs-validation" novalidate>
+          <!-- Ad alanı -->
+          <!-- required: boş bırakılamaz ; pattern: Türkçe harf ve en az 2 karakter -->
+          <div class="mb-3">
+            <label for="firstName" class="form-label">Ad (*) </label>
             <input
               type="text"
+              class="form-control"
               id="firstName"
-              class="form-control"
-              placeholder="Adınız ..."
-              autocomplete="Hamit"
+              name="firstName"
+              placeholder="Örn: Hamit"
+              autocomplete="given-name"
               required
-              autofocus
-              pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{3,}$"
+              pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{2,}$"
             />
-            <!-- Validation Alert -->
-            <div
-              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback"
-              role="alert"
-            >
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-
-              <strong>Validation:</strong>
-              Adınız için en az 3 karakter yazmalısınız
-            </div>
+            <div class="invalid-feedback">Lütfen adınızı giriniz (en az 2 harf).</div>
           </div>
 
-          <!-- LASTNAME -->
-          <div class="form-group mb-4">
-            <label for="lastName" class="form-label text-primary">Soyadınız (*)</label>
+          <!-- Soyad alanı -->
+          <!-- required + pattern: Türkçe harf ve en az 2 karakter -->
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Soyad (*)</label>
             <input
               type="text"
+              class="form-control"
               id="lastName"
-              class="form-control"
-              placeholder="Soyadınız ..."
-              autocomplete="Mızrak"
+              name="lastName"
+              placeholder="Örn: Mızrak"
+              autocomplete="family-name"
               required
-              autofocus
-              pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{3,45}$"
+              pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{2,}$"
             />
-            <!-- Validation Alert -->
-            <div
-              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback"
-              role="alert"
-            >
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-
-              <strong>Validation:</strong>
-              Soyadı için en az 3 enfazla 45 karakter yazmalısınız
-            </div>
+            <div class="invalid-feedback">Lütfen soyadınızı giriniz (en az 2 harf).</div>
           </div>
 
-          <!-- USERNAME -->
-          <div class="form-group mb-4">
-            <label for="username" class="form-label text-primary">Kullanıcı adı (*)</label>
+          <!-- E-posta alanı -->
+          <!-- type="email": HTML5 e-posta formatı kontrolü sağlar ; required: boş olamaz -->
+          <div class="mb-3">
+            <label for="email" class="form-label">E-posta (*)</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="hamitmizrak@gmail.com"
+              autocomplete="email"
+              required
+            />
+            <div class="invalid-feedback">Geçerli bir e-posta adresi giriniz.</div>
+          </div>
+
+          <!-- Kullanıcı adı alanı -->
+          <!-- pattern: 3-16 karakter; harf, rakam, . _ - -->
+          <div class="mb-3">
+            <label for="username" class="form-label">Kullanıcı Adı (*)</label>
             <input
               type="text"
-              id="username"
               class="form-control"
-              placeholder="Kullanıcı adınız ..."
-              autocomplete="HamitMızrak"
+              id="username"
+              name="username"
+              placeholder="Örn: Hamit Mızrak"
+              autocomplete="username"
               required
-              autofocus
-              pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{3,16}$"
+              pattern="^[A-Za-z0-9._-]{3,16}$"
             />
-            <!-- Validation Alert -->
-            <div class="form-text text-danger">
+            <div class="form-text">
               3–16 karakter; harf, rakam, nokta, alt çizgi, tire kullanılabilir.
             </div>
-            <div
-              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback"
-              role="alert"
-            >
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-
-              <strong>Validation:</strong>
+            <div class="invalid-feedback">
               Kullanıcı adı formatı hatalı (3–16 uzunluk, izinli karakterler: a-z, 0-9, . _ -).
             </div>
           </div>
 
-          <!-- EMAIL -->
-          <div class="form-group mb-4">
-            <label for="emailName" class="form-label text-primary">Email (*)</label>
-            <input
-              type="email"
-              id="emailName"
-              class="form-control"
-              placeholder="hamitmizrak@gmail.com ..."
-              autocomplete="mail@"
-              required
-              autofocus
-              pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{3,}$"
-            />
-            <!-- Validation Alert -->
-            <div
-              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback"
-              role="alert"
-            >
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-
-              <strong>Validation:</strong>
-              Mail formatında yazmalısınız.
-            </div>
-          </div>
-
-          <!-- PASSWORD -->
-          <div class="form-group mb-4">
-            <label for="password" class="form-label text-primary">Şifreniz (*)</label>
+          <!-- Şifre alanı -->
+          <!-- pattern: en az 8 karakter, 1 büyük harf, 1 küçük harf, 1 rakam -->
+          <div class="mb-3">
+            <label for="password" class="form-label">Şifre (*)</label>
             <input
               type="password"
+              class="form-control"
               id="password"
-              class="form-control"
-              placeholder="şifreniz..."
-              autocomplete="sifre"
+              name="password"
+              placeholder="********"
+              autocomplete="new-password"
               required
-              autofocus
               minlength="8"
               maxlength="64"
-              title="Şifreniz en az 8 karakter olmalı, en az bir büyük harf, bir küçük harf ve bir rakam içermelidir."
               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,64}$"
             />
-            <!-- Validation Alert -->
-            <div class="form-text invalid-feedback text-danger">
+            <div class="form-text">
               En az 8 karakter, 1 büyük harf, 1 küçük harf ve 1 rakam içermelidir.
             </div>
-            <div
-              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback"
-              role="alert"
-            >
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-
-              <strong>Validation:</strong>
-              Şifreler uyuşmuyor uygun formatında yazmalısınız.
-            </div>
+            <div class="invalid-feedback">Şifre kriterlerini karşılamıyor.</div>
           </div>
 
-          <!-- RE-PASSWORD -->
-          <div class="form-group mb-4">
-            <label for="confirmPassword" class="form-label text-primary">Şifre Tekrarı (*)</label>
+          <!-- Şifre (tekrar) alanı -->
+          <!-- JS ile password alanıyla eşleşme kontrolü (setCustomValidity) -->
+          <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Şifre (Tekrar) (*)</label>
             <input
               type="password"
-              id="confirmPassword"
               class="form-control"
-              placeholder="şifrenizi tekrar giriniz..."
-              autocomplete="sifre"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="********"
+              autocomplete="new-password"
               required
-              autofocus
-              minlength="8"
-              maxlength="64"
-              title="Şifreniz en az 8 karakter olmalı, en az bir büyük harf, bir küçük harf ve bir rakam içermelidir."
-              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,64}$"
             />
-            <!-- Validation Alert -->
-            <div class="form-text invalid-feedback text-danger">
-              En az 8 karakter, 1 büyük harf, 1 küçük harf ve 1 rakam içermelidir.
-            </div>
-
-            <div
-              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback"
-              role="alert"
-            >
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-
-              <strong>Validation:</strong>
-              Şifreler uyuşmuyor formatında yazmalısınız.
-            </div>
+            <div class="invalid-feedback">Şifreler eşleşmiyor.</div>
           </div>
 
           <!-- KVKK / kullanım şartları onayı -->
           <!-- required: işaretlenmeden form gönderilemez -->
-
           <div class="mb-3 form-check">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="terms" />
-              <label class="form-check-label" for="terms">Okudum, Onaylıyorum</label>
-            </div>
-
-            <div
-              class="mt-2 mb-1 alert alert-success alert-dismissible fade show invalid-feedback"
-              role="alert"
-            >
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-
-              <strong>Validation:</strong>
-              Devam edebilmeniz için onay vermeniz gerekiyor.
-            </div>
+            <input class="form-check-input" type="checkbox" id="terms" required />
+            <label class="form-check-label" for="terms">
+              KVKK ve kullanım şartlarını okudum, kabul ediyorum.
+            </label>
+            <div class="invalid-feedback">Devam etmek için onay vermelisiniz.</div>
           </div>
 
-          <!-- SUBMIT BUTTON -->
-          <div class="d-grid44 ms-4">
-            <button type="reset" class="btn btn-danger btn-lg">Temizle</button>
-            <button id="submitBtn" type="submit" class="btn btn-primary btn-lg">Kayıt Ol</button>
+          <!-- Gönder butonu -->
+          <!-- type="submit": formu gönderir; JS tarafında valid değilse engellenir -->
+          <div class="d-grid44">
+            <button type="reset" class="btn btn-danger">Temizle</button>
+            <button id="submitBtn" type="submit" class="btn btn-primary">Kayıt Ol</button>
+            <a href="http://www.google.com" target="_blank" class="btn btn-success">Home Page</a>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- end code -->
-
-    <!-- Bootstrap JavaScript Libraries -->
+    <!-- Bootstrap 5 JS (CDN) + Popper -->
+    <!-- Bu satırlar Bootstrap'ın interaktif bileşenleri için gerekli JS'i yükler. -->
     <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-      crossorigin="anonymous"
-    ></script>
-
-    <!-- external js -->
-    <!-- <script src="script.js"></script> -->
-    <!-- internal js -->
+    <!-- Form doğrulama ve demo gönderim JS'i -->
+    <!-- Aşağıdaki JS, Bootstrap tarzı doğrulamayı etkinleştirir ve şifre eşleşmesini kontrol eder. -->
     <script>
-      function attachValidity() {
-        input.addEventListener('input', function () {
-          if (this.checkValidity()) {
-            this.classList.remove('is-invalid');
-            //this.classList.add('is-valid');
-            alert('success');
-          } else {
-            //this.classList.remove('is-valid');
-            //this.classList.add('is-invalid');
-            alert('failed');
+      // Yardımcı: Bir input geçerli olduğunda kırmızı çerçeveyi kaldırmak için dinleyici ekler
+      function attachLiveValidity(input) {
+        input.addEventListener('input', () => {
+          if (input.checkValidity()) {
+            input.classList.remove('is-invalid');
           }
         });
       }
 
-      // password ve confirmPassword eşitliği kontrolü
-      const validatePasswordMatch = function () {
-        const password = document.getElementById('password');
-        const confirmPassword = document.getElementById('confirmPassword');
-
-        if (password.value !== confirmPassword.value) {
-          confirmPassword.setCustomValidity('Şifreler uyuşmuyor');
+      // Şifre eşleşme kontrolü (confirmPassword için setCustomValidity kullanır)
+      function validatePasswordMatch() {
+        const pass = document.getElementById('password');
+        const confirm = document.getElementById('confirmPassword');
+        if (confirm.value && confirm.value !== pass.value) {
+          confirm.setCustomValidity('Şifreler eşleşmiyor');
         } else {
-          confirmPassword.setCustomValidity('');
+          confirm.setCustomValidity('');
         }
-      }; //end validatePasswordMatch
+      }
 
-      // Sayfa inputlar için doğrulayıcı bileşenler
+      // Sayfa yüklendiğinde çalışacak kurulumlar
       document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('registerForm');
-        const inputs = form.querySelectorAll('input');
         const successAlert = document.getElementById('successAlert');
-        //Tüm inputları için canlı listener ekle
-        inputs.forEach(attachValidity);
+        const inputs = form.querySelectorAll('input');
 
-        // password ve confirmPassword eşitliği kontrolü
-        const password = document.getElementById('password');
-        const confirmPassword = document.getElementById('confirmPassword');
-        password.addEventListener('input', validatePasswordMatch);
-        confirmPassword.addEventListener('input', validatePasswordMatch);
+        // Tüm inputlar için canlı doğruluk dinleyicisi bağla
+        inputs.forEach(attachLiveValidity);
 
-        // Form submit işlemi
-        form.addEventListener('submit', function (event) {
-          // Şifre eşitliğini kontrol et
-          validatePasswordMatch();
+        // Şifre - tekrar alanları arasında canlı eşleşme kontrolü bağla
+        const pass = document.getElementById('password');
+        const confirm = document.getElementById('confirmPassword');
+        pass.addEventListener('input', validatePasswordMatch);
+        confirm.addEventListener('input', validatePasswordMatch);
 
-          if (!form.checkValidity()) {
-            event.preventDefault(); // Formun varsayılan gönderimini engelle
-            event.stopPropagation(); // Olayın daha fazla yayılmasını engelle
-          } else {
-            event.preventDefault(); // Formun varsayılan gönderimini engelle
+        // Form gönderiminde Bootstrap doğrulama akışı
+        form.addEventListener(
+          'submit',
+          function (event) {
+            // Önce şifre eşleşmesini değerlendir
+            validatePasswordMatch();
 
-            successAlert.classList.remove('d-none');
-            setTimeout(() => {
-              successAlert.classList.add('d-none');
-            }, 3000);
-          }
-        }); //end form submit
-      }); //end DOMContentLoaded
+            // Form geçerli değilse gönderimi engelle
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            } else {
+              // DEMO: Backend olmadığı için gerçek gönderimi iptal ediyoruz
+              event.preventDefault();
+
+              // Başarı mesajını kısa süreli göster
+              successAlert.classList.remove('d-none');
+              setTimeout(() => successAlert.classList.add('d-none'), 2500);
+
+              // İsterseniz burada form verilerini toplayıp fetch ile API'ye POST edebilirsiniz.
+              // Örn:
+              // const payload = Object.fromEntries(new FormData(form).entries());
+              // fetch('/auth/register', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) })
+
+              // (Opsiyonel) Formu sıfırlamak isterseniz:
+              // form.reset();
+              // form.classList.remove('was-validated');
+              // confirm.setCustomValidity('');
+            }
+
+            // Bootstrap görünür doğrulamayı etkinleştir
+            form.classList.add('was-validated');
+          },
+          false
+        );
+      });
     </script>
   </body>
 </html>
