@@ -32,215 +32,266 @@
         max-height: 50vh;
         overflow: auto;
       }
+
+      .card_top {
+        margin-top: 4rem;
+      }
     </style>
   </head>
-  <body class="d-flex align-items-center justify-content-center">
-    <!-- Başarılı kayıt sonrası gösterilecek demo mesaj alanı (başta gizli) -->
-    <div
-      id="successAlert"
-      class="alert alert-success position-fixed top-0 start-50 translate-middle-x mt-3 d-none"
-      role="alert"
-    >
-      Kayıt başarılı .
-    </div>
-
-    <!-- Kart: Formu içinde barındırır -->
-    <div class="card shadow-sm auth-card">
-      <div class="card-body p-4">
-        <h1 class="h4 mb-3 text-center text-primary h1">Kayıt Ol</h1>
-        <p class="text-secondary text-muted text-center mb-4">
-          (*) Lütfen bilgilerinizi eksiksiz doldurunuz.
-        </p>
-
-        <!-- Form etiketi -->
-        <!-- novalidate: Tarayıcı'nın default baloncuk uyarılarını kapatır, Bootstrap ile özel doğrulama uygularız. -->
-        <form id="registerForm" class="needs-validation" novalidate>
-          <!-- Ad alanı -->
-          <!-- required: boş bırakılamaz ; pattern: Türkçe harf ve en az 2 karakter -->
-          <div class="mb-3">
-            <label for="firstName" class="form-label">Ad (*)</label>
-            <input
-              type="text"
-              class="form-control"
-              id="firstName"
-              name="firstName"
-              placeholder="Örn: Hamit"
-              autocomplete="given-name"
-              required
-              pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{2,}$"
-            />
-            <div class="invalid-feedback">Lütfen adınızı giriniz (en az 2 harf).</div>
-          </div>
-
-          <!-- Soyad alanı -->
-          <!-- required + pattern: Türkçe harf ve en az 2 karakter -->
-          <div class="mb-3">
-            <label for="lastName" class="form-label">Soyad (*)</label>
-            <input
-              type="text"
-              class="form-control"
-              id="lastName"
-              name="lastName"
-              placeholder="Örn: Mızrak"
-              autocomplete="family-name"
-              required
-              pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{2,}$"
-            />
-            <div class="invalid-feedback">Lütfen soyadınızı giriniz (en az 2 harf).</div>
-          </div>
-
-          <!-- E-posta alanı -->
-          <!-- type="email": HTML5 e-posta formatı kontrolü sağlar ; required: boş olamaz -->
-          <div class="mb-3">
-            <label for="email" class="form-label">E-posta (*)</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              name="email"
-              placeholder="hamitmizrak@gmail.com"
-              autocomplete="email"
-              required
-            />
-            <div class="invalid-feedback">Geçerli bir e-posta adresi giriniz.</div>
-          </div>
-
-          <!-- Kullanıcı adı alanı -->
-          <!-- pattern: 3-16 karakter; harf, rakam, . _ - -->
-          <div class="mb-3">
-            <label for="username" class="form-label">Kullanıcı Adı (*)</label>
-            <input
-              type="text"
-              class="form-control"
-              id="username"
-              name="username"
-              placeholder="Örn: Hamit Mızrak"
-              autocomplete="username"
-              required
-              pattern="^[A-Za-z0-9._-]{3,16}$"
-            />
-            <div class="form-text">
-              3–16 karakter; harf, rakam, nokta, alt çizgi, tire kullanılabilir.
-            </div>
-            <div class="invalid-feedback">
-              Kullanıcı adı formatı hatalı (3–16 uzunluk, izinli karakterler: a-z, 0-9, . _ -).
-            </div>
-          </div>
-
-          <!-- Şifre alanı -->
-          <!-- pattern: en az 8 karakter, 1 büyük harf, 1 küçük harf, 1 rakam -->
-          <div class="mb-3">
-            <label for="password" class="form-label">Şifre (*)</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              name="password"
-              placeholder="********"
-              autocomplete="new-password"
-              required
-              minlength="8"
-              maxlength="64"
-              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,64}$"
-            />
-            <div class="form-text">
-              En az 8 karakter, 1 büyük harf, 1 küçük harf ve 1 rakam içermelidir.
-            </div>
-            <div class="invalid-feedback">Şifre kriterlerini karşılamıyor.</div>
-          </div>
-
-          <!-- Şifre (tekrar) alanı -->
-          <!-- JS ile password alanıyla eşleşme kontrolü (setCustomValidity) -->
-          <div class="mb-3">
-            <label for="confirmPassword" class="form-label">Şifre (Tekrar) (*)</label>
-            <input
-              type="password"
-              class="form-control"
-              id="confirmPassword"
-              name="confirmPassword"
-              placeholder="********"
-              autocomplete="new-password"
-              required
-            />
-            <div class="invalid-feedback">Şifreler eşleşmiyor.</div>
-          </div>
-
-          <!-- Şifre Göster -->
-          <div class="mb-3 form-check">
-            <input class="form-check-input" type="checkbox" id="togglePwd" />
-            <label class="form-check-label" for="togglePwd">Şifreyi Göster</label>
-          </div>
-
-          <!-- KVKK / kullanım şartları onayı -->
-          <!-- required: işaretlenmeden form gönderilemez -->
-          <div class="mb-3 form-check">
-            <input class="form-check-input" type="checkbox" id="terms" required />
-            <label class="form-check-label" for="terms">
-              KVKK ve kullanım şartlarını okudum, kabul ediyorum.
-            </label>
-            <div class="invalid-feedback">Devam etmek için onay vermelisiniz.</div>
-          </div>
-
-          <!-- Gönder butonu -->
-          <!-- type="submit": formu gönderir; JS tarafında valid değilse engellenir -->
-          <div class="d-grid44">
-            <button onclick="resetData()" class="btn btn-danger">Temizle</button>
-            <button type="submit" id="submitBtn" class="btn btn-primary">Kayıt Ol</button>
-            <a href="http://www.google.com" target="_blank" class="btn btn-success">Home Page</a>
-          </div>
-        </form>
+  <body class="">
+    <nav class="fixed-top navbar navbar-expand-md navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button
+          class="navbar-toggler d-lg-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="#" aria-current="page">
+                Home
+                <span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="dropdownId"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownId">
+                <a class="dropdown-item" href="#">Action 1</a>
+                <a class="dropdown-item" href="#">Action 2</a>
+              </div>
+            </li>
+          </ul>
+          <form class="d-flex my-2 my-lg-0">
+            <input class="form-control me-sm-2" type="text" placeholder="Search" />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
       </div>
-    </div>
+    </nav>
 
-    <!-- Modal Body -->
-    <div
-      class="modal fade"
-      id="termsModal"
-      tabindex="-1"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      role="dialog"
-      aria-labelledby="modalTitleId"
-      aria-hidden="true"
-    >
+    <div class="d-flex align-items-center card_top justify-content-center">
+      <!-- Başarılı kayıt sonrası gösterilecek demo mesaj alanı (başta gizli) -->
       <div
-        class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md"
-        role="document"
+        id="successAlert"
+        class="alert alert-success position-fixed top-0 start-50 translate-middle-x mt-3 d-none"
+        role="alert"
       >
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalTitleId">KVKK ve Kullanım Şartları</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <p>
-              Bu metin, kişisel verilerin korunması ve kullanım şartları hakkında bilgilendirme
-              amacıyla konulmuştur.
-            </p>
-            <p>1) İşlenen veriler, amaç, hukuki sebep, saklama süresi...</p>
-            <p>2) Üçüncü taraflarla paylaşım, aktarım, güvenlik önlemleri...</p>
-            <p>3) İlgili kişi hakları (KVKK md. 11); başvuru yöntemleri...</p>
-            <p>4) Çerezler, cihaz tanımlayıcıları, oturum ve analitik veriler...</p>
-            <p>5) İletişim ve itiraz mekanizmaları...</p>
-            <p>6) Sürüm, yürürlük tarihi ve değişiklik yetkisi...</p>
-            <hr />
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+        Kayıt başarılı .
+      </div>
+
+      <!-- Kart: Formu içinde barındırır -->
+      <div class="card shadow-sm auth-card mt-5">
+        <div class="card-body p-4">
+          <h1 class="h4 mb-3 text-center text-primary h1">Kayıt Ol</h1>
+          <p class="text-secondary text-muted text-center mb-4">
+            (*) Lütfen bilgilerinizi eksiksiz doldurunuz.
+          </p>
+
+          <!-- Form etiketi -->
+          <!-- novalidate: Tarayıcı'nın default baloncuk uyarılarını kapatır, Bootstrap ile özel doğrulama uygularız. -->
+          <form id="registerForm" class="needs-validation" novalidate>
+            <!-- Ad alanı -->
+            <!-- required: boş bırakılamaz ; pattern: Türkçe harf ve en az 2 karakter -->
+            <div class="mb-3">
+              <label for="firstName" class="form-label">Ad (*)</label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                name="firstName"
+                placeholder="Örn: Hamit"
+                autocomplete="given-name"
+                required
+                pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{2,}$"
+              />
+              <div class="invalid-feedback">Lütfen adınızı giriniz (en az 2 harf).</div>
+            </div>
+
+            <!-- Soyad alanı -->
+            <!-- required + pattern: Türkçe harf ve en az 2 karakter -->
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Soyad (*)</label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                name="lastName"
+                placeholder="Örn: Mızrak"
+                autocomplete="family-name"
+                required
+                pattern="^[A-Za-zÇĞİÖŞÜçğıöşü' -]{2,}$"
+              />
+              <div class="invalid-feedback">Lütfen soyadınızı giriniz (en az 2 harf).</div>
+            </div>
+
+            <!-- E-posta alanı -->
+            <!-- type="email": HTML5 e-posta formatı kontrolü sağlar ; required: boş olamaz -->
+            <div class="mb-3">
+              <label for="email" class="form-label">E-posta (*)</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="hamitmizrak@gmail.com"
+                autocomplete="email"
+                required
+              />
+              <div class="invalid-feedback">Geçerli bir e-posta adresi giriniz.</div>
+            </div>
+
+            <!-- Kullanıcı adı alanı -->
+            <!-- pattern: 3-16 karakter; harf, rakam, . _ - -->
+            <div class="mb-3">
+              <label for="username" class="form-label">Kullanıcı Adı (*)</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                placeholder="Örn: Hamit Mızrak"
+                autocomplete="username"
+                required
+                pattern="^[A-Za-z0-9._-]{3,16}$"
+              />
+              <div class="form-text">
+                3–16 karakter; harf, rakam, nokta, alt çizgi, tire kullanılabilir.
+              </div>
+              <div class="invalid-feedback">
+                Kullanıcı adı formatı hatalı (3–16 uzunluk, izinli karakterler: a-z, 0-9, . _ -).
+              </div>
+            </div>
+
+            <!-- Şifre alanı -->
+            <!-- pattern: en az 8 karakter, 1 büyük harf, 1 küçük harf, 1 rakam -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Şifre (*)</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="********"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                maxlength="64"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,64}$"
+              />
+              <div class="form-text">
+                En az 8 karakter, 1 büyük harf, 1 küçük harf ve 1 rakam içermelidir.
+              </div>
+              <div class="invalid-feedback">Şifre kriterlerini karşılamıyor.</div>
+            </div>
+
+            <!-- Şifre (tekrar) alanı -->
+            <!-- JS ile password alanıyla eşleşme kontrolü (setCustomValidity) -->
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Şifre (Tekrar) (*)</label>
+              <input
+                type="password"
+                class="form-control"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="********"
+                autocomplete="new-password"
+                required
+              />
+              <div class="invalid-feedback">Şifreler eşleşmiyor.</div>
+            </div>
+
+            <!-- Şifre Göster -->
+            <div class="mb-3 form-check">
+              <input class="form-check-input" type="checkbox" id="togglePwd" />
+              <label class="form-check-label" for="togglePwd">Şifreyi Göster</label>
+            </div>
+
+            <!-- KVKK / kullanım şartları onayı -->
+            <!-- required: işaretlenmeden form gönderilemez -->
+            <div class="mb-3 form-check">
+              <input class="form-check-input" type="checkbox" id="terms" required />
+              <label class="form-check-label" for="terms">
+                KVKK ve kullanım şartlarını okudum, kabul ediyorum.
+              </label>
+              <div class="invalid-feedback">Devam etmek için onay vermelisiniz.</div>
+            </div>
+
+            <!-- Gönder butonu -->
+            <!-- type="submit": formu gönderir; JS tarafında valid değilse engellenir -->
+            <div class="d-grid44">
+              <button onclick="resetData()" class="btn btn-danger">Temizle</button>
+              <button type="submit" id="submitBtn" class="btn btn-primary">Kayıt Ol</button>
+              <a href="http://www.google.com" target="_blank" class="btn btn-success">Home Page</a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div
+        class="modal fade"
+        id="termsModal"
+        tabindex="-1"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        role="dialog"
+        aria-labelledby="modalTitleId"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalTitleId">KVKK ve Kullanım Şartları</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>
+                Bu metin, kişisel verilerin korunması ve kullanım şartları hakkında bilgilendirme
+                amacıyla konulmuştur.
+              </p>
+              <p>1) İşlenen veriler, amaç, hukuki sebep, saklama süresi...</p>
+              <p>2) Üçüncü taraflarla paylaşım, aktarım, güvenlik önlemleri...</p>
+              <p>3) İlgili kişi hakları (KVKK md. 11); başvuru yöntemleri...</p>
+              <p>4) Çerezler, cihaz tanımlayıcıları, oturum ve analitik veriler...</p>
+              <p>5) İletişim ve itiraz mekanizmaları...</p>
+              <p>6) Sürüm, yürürlük tarihi ve değişiklik yetkisi...</p>
+              <hr />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Optional: Place to the bottom of scripts -->
-    <script>
-      const myModal = new bootstrap.Modal(document.getElementById('termsModal'), options);
-    </script>
 
     <!-- Bootstrap 5 JS (CDN) + Popper -->
     <!-- Bu satırlar Bootstrap'ın interaktif bileşenleri için gerekli JS'i yükler. -->
