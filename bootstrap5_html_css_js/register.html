@@ -70,7 +70,7 @@
         >
           <!-- FIRSTNAME -->
           <div class="form-group mb-4">
-            <label for="firstName" class="form-label text-primary">Adınız</label>
+            <label for="firstName" class="form-label text-primary">Adınız (*)</label>
             <input
               type="text"
               id="firstName"
@@ -83,7 +83,7 @@
             />
             <!-- Validation Alert -->
             <div
-              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback44"
+              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback"
               role="alert"
             >
               <button
@@ -100,7 +100,7 @@
 
           <!-- LASTNAME -->
           <div class="form-group mb-4">
-            <label for="lastName" class="form-label text-primary">Soyadınız</label>
+            <label for="lastName" class="form-label text-primary">Soyadınız (*)</label>
             <input
               type="text"
               id="lastName"
@@ -113,7 +113,7 @@
             />
             <!-- Validation Alert -->
             <div
-              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback44"
+              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback"
               role="alert"
             >
               <button
@@ -130,12 +130,12 @@
 
           <!-- USERNAME -->
           <div class="form-group mb-4">
-            <label for="username" class="form-label text-primary">Kullanıcı adı</label>
+            <label for="username" class="form-label text-primary">Kullanıcı adı (*)</label>
             <input
               type="text"
               id="username"
               class="form-control"
-              placeholder="Soyadınız ..."
+              placeholder="Kullanıcı adınız ..."
               autocomplete="HamitMızrak"
               required
               autofocus
@@ -146,7 +146,7 @@
               3–16 karakter; harf, rakam, nokta, alt çizgi, tire kullanılabilir.
             </div>
             <div
-              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback44"
+              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback"
               role="alert"
             >
               <button
@@ -163,7 +163,7 @@
 
           <!-- EMAIL -->
           <div class="form-group mb-4">
-            <label for="emailName" class="form-label text-primary">Email</label>
+            <label for="emailName" class="form-label text-primary">Email (*)</label>
             <input
               type="email"
               id="emailName"
@@ -176,7 +176,7 @@
             />
             <!-- Validation Alert -->
             <div
-              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback44"
+              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback"
               role="alert"
             >
               <button
@@ -191,7 +191,65 @@
             </div>
           </div>
 
-          <!-- pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,64}$" -->
+          <!-- PASSWORD -->
+          <div class="form-group mb-4">
+            <label for="password" class="form-label text-primary">Şifreniz</label>
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              placeholder="şifreniz..."
+              autocomplete="sifre"
+              required
+              autofocus
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,64}$"
+            />
+            <!-- Validation Alert -->
+            <div
+              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback"
+              role="alert"
+            >
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+
+              <strong>Validation:</strong>
+              Şifre formatında yazmalısınız.
+            </div>
+          </div>
+
+            <!-- RE-PASSWORD -->
+          <div class="form-group mb-4">
+            <label for="re-password" class="form-label text-primary">Şifreniz</label>
+            <input
+              type="password"
+              id="re-password"
+              class="form-control"
+              placeholder="şifrenizi tekrar giriniz..."
+              autocomplete="sifre"
+              required
+              autofocus
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,64}$"
+            />
+            <!-- Validation Alert -->
+            <div
+              class="mt-2 mb-1 alert alert-danger alert-dismissible fade show invalid-feedback"
+              role="alert"
+            >
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+
+              <strong>Validation:</strong>
+              Şifreler uyuşmuyor formatında yazmalısınız.
+            </div>
+          </div>
         </form>
       </div>
     </div>
