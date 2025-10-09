@@ -22,11 +22,15 @@
     <style>
       body {
         min-height: 100vh;
-        background: #f6f8fa;
+        background: #454647;
       }
       .auth-card {
         max-width: 520px;
         width: 100%;
+      }
+      #termsBody {
+        max-height: 50vh;
+        overflow: auto;
       }
     </style>
   </head>
@@ -187,6 +191,68 @@
         </form>
       </div>
     </div>
+
+    <!-- Modal  -->
+    <!-- Modal trigger button -->
+    <button
+      type="button"
+      class="btn btn-primary btn-lg"
+      data-bs-toggle="modal"
+      data-bs-target="#termsModal"
+    >
+      Launch
+    </button>
+
+    <!-- Modal Body -->
+    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+    <div
+      class="modal fade"
+      id="termsModal"
+      tabindex="-1"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      role="dialog"
+      aria-labelledby="modalTitleId"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md"
+        role="document"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitleId">KVKK ve Kullanım Şartları</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Bu metin, kişisel verilerin korunması ve kullanım şartları hakkında bilgilendirme
+              amacıyla konulmuştur.
+            </p>
+            <p>1) İşlenen veriler, amaç, hukuki sebep, saklama süresi...</p>
+            <p>2) Üçüncü taraflarla paylaşım, aktarım, güvenlik önlemleri...</p>
+            <p>3) İlgili kişi hakları (KVKK md. 11); başvuru yöntemleri...</p>
+            <p>4) Çerezler, cihaz tanımlayıcıları, oturum ve analitik veriler...</p>
+            <p>5) İletişim ve itiraz mekanizmaları...</p>
+            <p>6) Sürüm, yürürlük tarihi ve değişiklik yetkisi...</p>
+            <hr />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional: Place to the bottom of scripts -->
+    <script>
+      const myModal = new bootstrap.Modal(document.getElementById('termsModal'), options);
+    </script>
 
     <!-- Bootstrap 5 JS (CDN) + Popper -->
     <!-- Bu satırlar Bootstrap'ın interaktif bileşenleri için gerekli JS'i yükler. -->
